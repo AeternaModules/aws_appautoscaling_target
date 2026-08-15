@@ -36,7 +36,7 @@ output "appautoscaling_targets_service_namespace" {
 }
 output "appautoscaling_targets_suspended_state" {
   description = "Map of suspended_state values across all appautoscaling_targets, keyed the same as var.appautoscaling_targets"
-  value       = { for k, v in aws_appautoscaling_target.appautoscaling_targets : k => v.suspended_state if v.suspended_state != null && length(v.suspended_state) > 0 }
+  value       = { for k, v in aws_appautoscaling_target.appautoscaling_targets : k => one(v.suspended_state) if v.suspended_state != null && length(v.suspended_state) > 0 }
 }
 output "appautoscaling_targets_tags" {
   description = "Map of tags values across all appautoscaling_targets, keyed the same as var.appautoscaling_targets"
